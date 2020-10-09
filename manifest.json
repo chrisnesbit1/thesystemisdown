@@ -9,13 +9,12 @@
       "default_popup": "popup.html"
     },
     "permissions": [
+      "background",
+      "tabs",
       "<all_urls>"
     ],
-    "content_scripts": [ 
-        { 
-            "js": [ "jquery.2.2.2.min.js", "popup.js" ],
-             "matches": [ "http://*/*", "https://*/*"]
-        }
-    ],
-    "content_security_policy": "script-src https://jsonp.afeld.me/ 'self'; object-src 'self'"
+    "background" : {
+      "scripts": ["jquery.2.2.2.min.js", "contentScript.js"],
+      "persistent": false
+    }
 }

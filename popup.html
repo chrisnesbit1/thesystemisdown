@@ -6,17 +6,24 @@
     <title>The system is down!</title>
     <link rel="stylesheet" href="popup.css">
     <script src="jquery.2.2.2.min.js"></script>
-    <script src="popup.js"></script>
+    <script src="contentScript.js"></script>
 </head>
 
 <body>
-    <div id="joke"></div>
-    <div id="website">
-        <label>URL:</label>
-        <input type="text" id="url" placeholder="https://yahoo.com" value="https://google.com" />
-        <input type="button" id="submit" value="Submit" />
+    <h1>a> the system is down!<br/>
+        a> or is it?<br/>
+        a> <span id="url"></span>
+    </h1>
+    <div id="video">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+        <span id="down">
+            <iframe width="360" src="https://www.youtube.com/embed/GtQpThwWQtQ?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </span>
+        <span id="up">
+            <iframe width="360" src="https://www.youtube.com/embed/votBDwhTu1E?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </span>
     </div>
-    <div id="one-more">Haha, one more!</div>
 </body>
 
 </html>
