@@ -16,38 +16,44 @@ const submitHostname = async function(targetEl, url, delayMs) {
     $('#up').hide();
     $('#down').hide();
 
-    var hostname = (new URL(url)).hostname;
-    for (var i = 0; i < hostname.length; i++) {
-        await sleep(delayMs);
-        if (i == 4) {
-            $('.lds-spinner').css('display', 'inline-block');
+    try {
+        var hostname = (new URL(url)).hostname;
+        for (var i = 0; i < hostname.length; i++) {
+            await sleep(delayMs);
+            if (i == 4) {
+                $('.lds-spinner').css('display', 'inline-block');
+            }
+            targetEl.html(targetEl.html()+hostname.charAt(i));
         }
-        targetEl.html(targetEl.html()+hostname.charAt(i));
-    }
 
-    var isUp = ping(url);
-    $('.lds-spinner').hide();
-    if (isUp){
-        setColor('green');
-        $('#up').show();
-        $('#down').hide();
-        $("#up iframe")[0].src += "&autoplay=1&loop=1";
-        ev.preventDefault();
-    } else {
-        setColor('red');
-        $('#up').hide();
-        $('#down').show();
-        $("#down iframe")[0].src += "&autoplay=1&loop=1";
-    }
+        var isUp = ping(url);
+        $('.lds-spinner').hide();
+        if (isUp){
+            setColor('green');
+            $('#up').show();
+            $('#down').hide();
+            $("#up iframe")[0].src += "&autoplay=1&loop=1";
+        } else {
+            setColor('red');
+            $('#up').hide();
+            $('#down').show();
+            $("#down iframe")[0].src += "&autoplay=1&loop=1";
+        }
+    } catch(err) {}
 };
 
 const ping = function(url) {
     var isUp = false;
 
+    if (url.substr(0, 6) == 'chrome') {
+        return false;
+    }
+
     $.ajax({
         url: url,
         type: "get",
         async: false,
+        timeout: 3000, // sets timeout to 3 seconds
         statusCode: {
             200: function(xhr) {
                 isUp=true;
