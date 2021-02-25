@@ -45,7 +45,7 @@ const submitHostname = async function(targetEl, url, delayMs) {
 const ping = function(url) {
     var isUp = false;
 
-    if (url.substr(0, 6) == 'chrome') {
+    if (url && url.substr(0, 6) == 'chrome') {
         return false;
     }
 
